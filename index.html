@@ -507,6 +507,23 @@
         setTimeout(() => {
             location.reload();
         }, 3600000);
+
+		// --- PASTE THIS NEW CODE HERE ---
+    function openFullscreen() {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    }
+
+    // Triggers fullscreen on the very first touch or click
+    document.addEventListener('touchstart', openFullscreen, { once: true });
+    document.addEventListener('click', openFullscreen, { once: true });
+    // --------------------------------
     </script>
 <manus-content-root></manus-content-root><script>
 			var __manus_space_editor_info = {
