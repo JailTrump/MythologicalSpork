@@ -127,45 +127,45 @@
             line-height: 1.35;
         }
 
-        /* Center Circle + Light-Green Ring Growing Outward in 3 Width Stages */
+        /* Original #84cc16 Lime Green Breathing Ring */
         .logo-wrapper {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 32px;
-            min-height: 208px;
+            min-height: 212px;
         }
 
         .logo-stage {
             position: relative;
-            width: 208px;
-            height: 208px;
+            width: 212px;
+            height: 212px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .green-grow-ring {
+        .green-breath-ring {
             position: absolute;
-            width: 116px;
-            height: 116px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: radial-gradient(circle, #a3e635 58%, #84cc16 88%, #65a30d 100%);
-            opacity: 0.04;
-            transform: scale(0.92);
+            background: #84cc16;
+            opacity: 0.12;
+            transform: scale(0.95);
             transform-origin: center center;
             pointer-events: none;
             z-index: 1;
             will-change: transform, opacity;
-            animation: threeWidthGrow 10s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+            animation: breatheGreen 4.8s ease-in-out infinite;
         }
 
         .logo-inner {
             position: relative;
             z-index: 3;
-            width: 116px;
-            height: 116px;
+            width: 120px;
+            height: 120px;
             aspect-ratio: 1 / 1;
             background: #ffffff;
             border-radius: 50%;
@@ -176,8 +176,8 @@
         }
 
         .logo-image {
-            width: 82px;
-            height: 82px;
+            width: 84px;
+            height: 84px;
             object-fit: contain;
             -webkit-touch-callout: none;
             user-select: none;
@@ -264,43 +264,15 @@
             background: #1d4ed8;
         }
 
-        /* Almost invisible / shrunk -> Width 1 (a little wide) -> Width 2 (medium wide) -> Width 3 (larger wide) -> shrink back */
-        @keyframes threeWidthGrow {
-            0% {
-                transform: scale(0.92);
-                opacity: 0.05;
-            }
-            16% {
-                transform: scale(1.24);
-                opacity: 0.92;
-            }
-            24% {
-                transform: scale(1.24);
-                opacity: 0.85;
-            }
-            42% {
-                transform: scale(1.48);
-                opacity: 0.95;
+        /* Smooth inhale (expand) and exhale (contract) in solid #84cc16 */
+        @keyframes breatheGreen {
+            0%, 100% {
+                transform: scale(0.96);
+                opacity: 0.15;
             }
             50% {
-                transform: scale(1.48);
-                opacity: 0.88;
-            }
-            70% {
-                transform: scale(1.74);
-                opacity: 0.96;
-            }
-            82% {
-                transform: scale(1.74);
-                opacity: 0.25;
-            }
-            94% {
-                transform: scale(0.95);
-                opacity: 0.04;
-            }
-            100% {
-                transform: scale(0.92);
-                opacity: 0.05;
+                transform: scale(1.62);
+                opacity: 0.92;
             }
         }
 
@@ -325,15 +297,15 @@
                 height: 196px;
             }
 
-            .green-grow-ring,
+            .green-breath-ring,
             .logo-inner {
-                width: 108px;
-                height: 108px;
+                width: 112px;
+                height: 112px;
             }
 
             .logo-image {
-                width: 76px;
-                height: 76px;
+                width: 78px;
+                height: 78px;
             }
 
             .large-time {
@@ -389,10 +361,10 @@
             <h1 class="title">Metro Transit</h1>
             <p class="subtitle">Show operator your ticket</p>
 
-            <!-- Growing Light-Green Ring Around Center Logo -->
+            <!-- Breathing #84cc16 Green Circle Around Center Logo -->
             <div class="logo-wrapper">
                 <div class="logo-stage">
-                    <span class="green-grow-ring" aria-hidden="true"></span>
+                    <span class="green-breath-ring" aria-hidden="true"></span>
                     <div class="logo-inner">
                         <img src="go_to_logo_PUez.png" alt="Go To Logo" class="logo-image">
                     </div>
