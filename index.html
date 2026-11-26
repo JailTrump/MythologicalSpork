@@ -107,7 +107,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding: 20px 24px 24px;
+            padding: 18px 22px 20px;
             background: #ffffff;
             flex-grow: 1;
         }
@@ -115,7 +115,7 @@
         .title {
             font-size: 28px;
             font-weight: 700;
-            color: #374151;
+            color: #2f353d;
             margin-bottom: 2px;
             letter-spacing: -0.02em;
             line-height: 1.2;
@@ -123,50 +123,67 @@
 
         .subtitle {
             color: #4b5563;
-            margin-bottom: 36px;
-            font-size: 16px;
-            font-weight: 500;
+            margin-bottom: 28px;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.35;
         }
 
-        /* Pulsing Lime-Green Ring with Darker Green Shading */
+        /* Lime-Green Ring with Dark-Green Pulse Radiating Outward Every 10s */
         .logo-wrapper {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 42px;
+            margin-bottom: 32px;
         }
 
         .logo-container {
             position: relative;
-            width: 204px;
-            height: 204px;
+            width: 196px;
+            height: 196px;
             aspect-ratio: 1 / 1;
             border-radius: 50%;
-            background: radial-gradient(circle, #84cc16 62%, #65a30d 92%, #3f6212 100%);
+            background: #84cc16;
             display: flex;
             align-items: center;
             justify-content: center;
-            transform-origin: center center;
-            will-change: transform, box-shadow;
-            animation: oscillate 3.2s ease-in-out infinite;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(20, 83, 45, 0.14);
+        }
+
+        .logo-pulse-wave {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(21, 128, 61, 0.58) 0%, rgba(63, 98, 18, 0.42) 65%, rgba(101, 163, 13, 0) 100%);
+            transform: scale3d(0.95, 0.95, 1);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform, opacity;
+            animation: centerOutPulse 10s cubic-bezier(0.22, 1, 0.36, 1) infinite;
         }
 
         .logo-inner {
-            width: 128px;
-            height: 128px;
+            position: relative;
+            z-index: 2;
+            width: 120px;
+            height: 120px;
             aspect-ratio: 1 / 1;
             background: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(20, 83, 45, 0.25), inset 0 2px 5px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
         }
 
         .logo-image {
-            width: 92px;
-            height: 92px;
+            width: 84px;
+            height: 84px;
             object-fit: contain;
             -webkit-touch-callout: none;
             user-select: none;
@@ -175,10 +192,10 @@
         /* Large Time Display */
         .large-time {
             width: 100%;
-            font-size: 52px;
+            font-size: 50px;
             font-weight: 800;
-            color: #374151;
-            margin-bottom: 22px;
+            color: #2f353d;
+            margin-bottom: 20px;
             font-family: 'Inter', Roboto, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             letter-spacing: -0.025em;
             line-height: 1.05;
@@ -191,13 +208,13 @@
             width: 100%;
             background: #15803d;
             color: #ffffff;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
-            padding: 12px 32px;
+            padding: 12px 28px;
             border-radius: 9999px;
             border: none;
-            box-shadow: 0 4px 12px rgba(20, 83, 45, 0.25);
-            margin-bottom: 36px;
+            box-shadow: 0 3px 8px rgba(20, 83, 45, 0.2);
+            margin-bottom: 24px;
             cursor: pointer;
             transition: background-color 0.2s ease;
             user-select: none;
@@ -207,40 +224,43 @@
             background: #166534;
         }
 
-        /* Ticket Card Matching Screenshot Layout */
+        /* Ticket Card Matching Screenshot Font Size & Spacing */
         .ticket-info {
             width: 100%;
             background: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 8px;
-            padding: 18px 20px;
+            padding: 14px 16px;
             text-align: left;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .ticket-type {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
-            color: #374151;
-            line-height: 1.3;
-            margin-bottom: 8px;
+            color: #2f353d;
+            line-height: 1.25;
+            margin-bottom: 6px;
         }
 
         .ticket-area {
-            font-size: 13px;
+            font-size: 12px;
+            font-weight: 400;
             color: #6b7280;
-            margin-bottom: 18px;
+            line-height: 1.3;
+            margin-bottom: 12px;
         }
 
         .ticket-expires {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            color: #4b5563;
+            color: #374151;
+            line-height: 1.3;
         }
 
         .expires-highlight {
             font-weight: 700;
-            color: #4b5563;
+            color: #374151;
         }
 
         /* Bottom Blue Bar inside phone view */
@@ -276,25 +296,29 @@
             margin-top: 4px;
         }
 
-        /* Smooth Circle Pulse: Smaller -> Larger -> Smaller with Dark-Green Shadow */
-        @keyframes oscillate {
+        /* Radiates darker green from center outward every 10 seconds */
+        @keyframes centerOutPulse {
             0% {
-                transform: scale3d(0.84, 0.84, 1);
-                box-shadow: 0 6px 14px rgba(20, 83, 45, 0.35), inset 0 0 0 3px rgba(21, 128, 61, 0.35);
+                transform: scale3d(0.95, 0.95, 1);
+                opacity: 0;
             }
-            50% {
-                transform: scale3d(1.06, 1.06, 1);
-                box-shadow: 0 16px 30px rgba(20, 83, 45, 0.52), inset 0 0 0 4px rgba(20, 83, 45, 0.45);
+            8% {
+                transform: scale3d(1.02, 1.02, 1);
+                opacity: 0.85;
+            }
+            34% {
+                transform: scale3d(1.62, 1.62, 1);
+                opacity: 0;
             }
             100% {
-                transform: scale3d(0.84, 0.84, 1);
-                box-shadow: 0 6px 14px rgba(20, 83, 45, 0.35), inset 0 0 0 3px rgba(21, 128, 61, 0.35);
+                transform: scale3d(1.62, 1.62, 1);
+                opacity: 0;
             }
         }
 
         @keyframes fadeAndScale {
             0% {
-                opacity: 0.85;
+                opacity: 0.88;
                 transform: scale(0.99);
             }
             100% {
@@ -309,18 +333,19 @@
 
         @media (max-width: 390px) {
             .logo-container {
-                width: 188px;
-                height: 188px;
+                width: 180px;
+                height: 180px;
             }
 
-            .logo-inner {
-                width: 118px;
-                height: 118px;
+            .logo-inner,
+            .logo-pulse-wave {
+                width: 112px;
+                height: 112px;
             }
 
             .logo-image {
-                width: 84px;
-                height: 84px;
+                width: 78px;
+                height: 78px;
             }
 
             .large-time {
@@ -328,7 +353,11 @@
             }
 
             .reduced-button {
-                font-size: 28px;
+                font-size: 25px;
+            }
+
+            .ticket-type {
+                font-size: 17px;
             }
         }
     </style>
@@ -380,6 +409,7 @@
             <!-- Pulsing Circle Logo -->
             <div class="logo-wrapper">
                 <div class="logo-container">
+                    <span class="logo-pulse-wave" aria-hidden="true"></span>
                     <div class="logo-inner">
                         <img src="go_to_logo_PUez.png" alt="Go To Logo" class="logo-image">
                     </div>
