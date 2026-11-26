@@ -127,38 +127,53 @@
             line-height: 1.35;
         }
 
-        /* Continuous Breathing #84cc16 Ring (Skinny -> Middle -> Wide -> Back) */
+        /* Two Separate Center-Origin Green Rings on Independent Intervals */
         .logo-wrapper {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 32px;
-            min-height: 212px;
+            min-height: 216px;
         }
 
         .logo-stage {
             position: relative;
-            width: 212px;
-            height: 212px;
+            width: 216px;
+            height: 216px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .green-breath-ring {
+        /* 1. Vibrant green ring: always #84cc16, breathes wide <-> thin across 3 widths */
+        .vibrant-green-ring {
             position: absolute;
             width: 120px;
             height: 120px;
             border-radius: 50%;
             background: #84cc16;
-            opacity: 0.08;
-            transform: scale(0.95);
+            transform: scale(1.16);
             transform-origin: center center;
             pointer-events: none;
             z-index: 1;
-            will-change: transform, opacity;
-            animation: continuousThreeWidthBreath 6s ease-in-out infinite;
+            will-change: transform;
+            animation: vibrantBreathWidths 10s ease-in-out infinite;
+        }
+
+        /* 2. Smaller darker green ring: separate interval, stays darker green, never gets as wide */
+        .dark-green-pulse {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #15803d;
+            transform: scale(1.04);
+            transform-origin: center center;
+            pointer-events: none;
+            z-index: 2;
+            will-change: transform;
+            animation: darkShadowPulse 4.2s ease-in-out infinite;
         }
 
         .logo-inner {
@@ -264,35 +279,41 @@
             background: #1d4ed8;
         }
 
-        /* Continuous breathing: almost gone -> skinny -> middle -> wide -> middle -> skinny -> almost gone */
-        @keyframes continuousThreeWidthBreath {
+        /* Vibrant #84cc16 breathes across 3 widths (thin -> medium -> wide -> medium -> thin) without fading out */
+        @keyframes vibrantBreathWidths {
             0% {
-                transform: scale(0.95);
-                opacity: 0.06;
+                transform: scale(1.14);
             }
-            18% {
-                transform: scale(1.22);
-                opacity: 0.85;
+            16% {
+                transform: scale(1.32);
             }
-            34% {
-                transform: scale(1.44);
-                opacity: 0.92;
+            33% {
+                transform: scale(1.50);
             }
             50% {
-                transform: scale(1.68);
-                opacity: 0.96;
+                transform: scale(1.72);
             }
-            66% {
-                transform: scale(1.44);
-                opacity: 0.9;
+            67% {
+                transform: scale(1.50);
             }
-            82% {
-                transform: scale(1.22);
-                opacity: 0.78;
+            84% {
+                transform: scale(1.32);
             }
             100% {
-                transform: scale(0.95);
-                opacity: 0.06;
+                transform: scale(1.14);
+            }
+        }
+
+        /* Darker green pulse from middle on its own interval, smaller than the outer vibrant ring */
+        @keyframes darkShadowPulse {
+            0% {
+                transform: scale(1.03);
+            }
+            50% {
+                transform: scale(1.36);
+            }
+            100% {
+                transform: scale(1.03);
             }
         }
 
@@ -313,11 +334,12 @@
 
         @media (max-width: 390px) {
             .logo-stage {
-                width: 196px;
-                height: 196px;
+                width: 200px;
+                height: 200px;
             }
 
-            .green-breath-ring,
+            .vibrant-green-ring,
+            .dark-green-pulse,
             .logo-inner {
                 width: 112px;
                 height: 112px;
@@ -381,10 +403,11 @@
             <h1 class="title">Metro Transit</h1>
             <p class="subtitle">Show operator your ticket</p>
 
-            <!-- Continuous Breathing #84cc16 Green Circle Around Center Logo -->
+            <!-- Dual-Interval Green Rings Around Center Logo -->
             <div class="logo-wrapper">
                 <div class="logo-stage">
-                    <span class="green-breath-ring" aria-hidden="true"></span>
+                    <span class="vibrant-green-ring" aria-hidden="true"></span>
+                    <span class="dark-green-pulse" aria-hidden="true"></span>
                     <div class="logo-inner">
                         <img src="go_to_logo_PUez.png" alt="Go To Logo" class="logo-image">
                     </div>
