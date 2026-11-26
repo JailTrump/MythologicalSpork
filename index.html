@@ -76,32 +76,6 @@
             font-weight: 500;
         }
 
-        /* Top Navigation Bar */
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 16px;
-            color: #4b5563;
-            border-bottom: 1px solid #e5e7eb;
-            background: #ffffff;
-        }
-
-        .nav-center {
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .nav-date {
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .nav-time {
-            font-size: 12px;
-            color: #6b7280;
-        }
-
         /* Dark Header Bar with X Above Ticket Header */
         .dark-close-bar {
             width: 100%;
@@ -369,21 +343,6 @@
             </div>
         </div>
 
-        <!-- Top Navigation -->
-        <div class="top-nav">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-            <div class="nav-center">
-                <div class="nav-date" id="navDate">November 23</div>
-                <div class="nav-time" id="navTime">6:22 PM</div>
-            </div>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-        </div>
-
         <!-- Dark Header Strip with X Above Ticket Title -->
         <div class="dark-close-bar">
             <button class="close-x-btn" type="button" aria-label="Close">
@@ -437,7 +396,8 @@
                 minute: '2-digit',
                 hour12: false
             });
-            document.getElementById('statusTime').textContent = statusTime;
+            const statusEl = document.getElementById('statusTime');
+            if (statusEl) statusEl.textContent = statusTime;
 
             const navDate = now.toLocaleDateString('en-US', {
                 month: 'long',
@@ -448,8 +408,10 @@
                 minute: '2-digit',
                 hour12: true
             });
-            document.getElementById('navDate').textContent = navDate;
-            document.getElementById('navTime').textContent = navTime;
+            const navDateEl = document.getElementById('navDate');
+            const navTimeEl = document.getElementById('navTime');
+            if (navDateEl) navDateEl.textContent = navDate;
+            if (navTimeEl) navTimeEl.textContent = navTime;
 
             const largeTime = now.toLocaleTimeString('en-US', {
                 hour: 'numeric',
@@ -460,7 +422,7 @@
 
             const largeTimeElement = document.getElementById('largeTime');
             const currentSecond = now.getSeconds().toString();
-            if (currentSecond !== lastSecond) {
+            if (largeTimeElement && currentSecond !== lastSecond) {
                 largeTimeElement.textContent = largeTime;
                 largeTimeElement.classList.remove('animate-time-tick');
                 setTimeout(() => {
@@ -483,7 +445,8 @@
                 hour12: true
             });
 
-            document.getElementById('expiresDate').textContent = expiresDate;
+            const expiresEl = document.getElementById('expiresDate');
+            if (expiresEl) expiresEl.textContent = expiresDate;
         }
 
         updateTimeAndDate();
