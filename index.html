@@ -127,7 +127,7 @@
             line-height: 1.35;
         }
 
-        /* Original #84cc16 Lime Green Breathing Ring */
+        /* Continuous Breathing #84cc16 Ring (Skinny -> Middle -> Wide -> Back) */
         .logo-wrapper {
             width: 100%;
             display: flex;
@@ -152,13 +152,13 @@
             height: 120px;
             border-radius: 50%;
             background: #84cc16;
-            opacity: 0.12;
+            opacity: 0.08;
             transform: scale(0.95);
             transform-origin: center center;
             pointer-events: none;
             z-index: 1;
             will-change: transform, opacity;
-            animation: breatheGreen 4.8s ease-in-out infinite;
+            animation: continuousThreeWidthBreath 6s ease-in-out infinite;
         }
 
         .logo-inner {
@@ -264,15 +264,35 @@
             background: #1d4ed8;
         }
 
-        /* Smooth inhale (expand) and exhale (contract) in solid #84cc16 */
-        @keyframes breatheGreen {
-            0%, 100% {
-                transform: scale(0.96);
-                opacity: 0.15;
+        /* Continuous breathing: almost gone -> skinny -> middle -> wide -> middle -> skinny -> almost gone */
+        @keyframes continuousThreeWidthBreath {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.06;
+            }
+            18% {
+                transform: scale(1.22);
+                opacity: 0.85;
+            }
+            34% {
+                transform: scale(1.44);
+                opacity: 0.92;
             }
             50% {
-                transform: scale(1.62);
-                opacity: 0.92;
+                transform: scale(1.68);
+                opacity: 0.96;
+            }
+            66% {
+                transform: scale(1.44);
+                opacity: 0.9;
+            }
+            82% {
+                transform: scale(1.22);
+                opacity: 0.78;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0.06;
             }
         }
 
@@ -361,7 +381,7 @@
             <h1 class="title">Metro Transit</h1>
             <p class="subtitle">Show operator your ticket</p>
 
-            <!-- Breathing #84cc16 Green Circle Around Center Logo -->
+            <!-- Continuous Breathing #84cc16 Green Circle Around Center Logo -->
             <div class="logo-wrapper">
                 <div class="logo-stage">
                     <span class="green-breath-ring" aria-hidden="true"></span>
