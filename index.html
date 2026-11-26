@@ -127,47 +127,57 @@
             line-height: 1.35;
         }
 
-        /* Three-Stage Widening Lime-Green Ring with Dark-Green Shading */
+        /* Center Circle + Light-Green Ring Growing Outward in 3 Width Stages */
         .logo-wrapper {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 32px;
+            min-height: 208px;
         }
 
-        .logo-container {
+        .logo-stage {
             position: relative;
-            width: 196px;
-            height: 196px;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            background: radial-gradient(circle, #84cc16 60%, #65a30d 90%, #3f6212 100%);
+            width: 208px;
+            height: 208px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .green-grow-ring {
+            position: absolute;
+            width: 116px;
+            height: 116px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #a3e635 58%, #84cc16 88%, #65a30d 100%);
+            opacity: 0.04;
+            transform: scale(0.92);
             transform-origin: center center;
-            will-change: transform, box-shadow;
-            animation: threeStagePulse 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform, opacity;
+            animation: threeWidthGrow 10s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
         }
 
         .logo-inner {
             position: relative;
-            z-index: 2;
-            width: 120px;
-            height: 120px;
+            z-index: 3;
+            width: 116px;
+            height: 116px;
             aspect-ratio: 1 / 1;
             background: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 6px rgba(20, 83, 45, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
         }
 
         .logo-image {
-            width: 84px;
-            height: 84px;
+            width: 82px;
+            height: 82px;
             object-fit: contain;
             -webkit-touch-callout: none;
             user-select: none;
@@ -254,23 +264,43 @@
             background: #1d4ed8;
         }
 
-        /* Stage 1 (base) -> Stage 2 (mid widen) -> Stage 3 (full widen) -> return */
-        @keyframes threeStagePulse {
+        /* Almost invisible / shrunk -> Width 1 (a little wide) -> Width 2 (medium wide) -> Width 3 (larger wide) -> shrink back */
+        @keyframes threeWidthGrow {
             0% {
-                transform: scale3d(0.86, 0.86, 1);
-                box-shadow: 0 4px 10px rgba(20, 83, 45, 0.28), inset 0 0 0 2px rgba(21, 128, 61, 0.28);
+                transform: scale(0.92);
+                opacity: 0.05;
             }
-            28% {
-                transform: scale3d(0.96, 0.96, 1);
-                box-shadow: 0 8px 18px rgba(20, 83, 45, 0.38), inset 0 0 0 3px rgba(21, 128, 61, 0.42);
+            16% {
+                transform: scale(1.24);
+                opacity: 0.92;
             }
-            58% {
-                transform: scale3d(1.08, 1.08, 1);
-                box-shadow: 0 14px 26px rgba(20, 83, 45, 0.5), inset 0 0 0 4px rgba(20, 83, 45, 0.5);
+            24% {
+                transform: scale(1.24);
+                opacity: 0.85;
+            }
+            42% {
+                transform: scale(1.48);
+                opacity: 0.95;
+            }
+            50% {
+                transform: scale(1.48);
+                opacity: 0.88;
+            }
+            70% {
+                transform: scale(1.74);
+                opacity: 0.96;
+            }
+            82% {
+                transform: scale(1.74);
+                opacity: 0.25;
+            }
+            94% {
+                transform: scale(0.95);
+                opacity: 0.04;
             }
             100% {
-                transform: scale3d(0.86, 0.86, 1);
-                box-shadow: 0 4px 10px rgba(20, 83, 45, 0.28), inset 0 0 0 2px rgba(21, 128, 61, 0.28);
+                transform: scale(0.92);
+                opacity: 0.05;
             }
         }
 
@@ -290,19 +320,20 @@
         }
 
         @media (max-width: 390px) {
-            .logo-container {
-                width: 180px;
-                height: 180px;
+            .logo-stage {
+                width: 196px;
+                height: 196px;
             }
 
+            .green-grow-ring,
             .logo-inner {
-                width: 112px;
-                height: 112px;
+                width: 108px;
+                height: 108px;
             }
 
             .logo-image {
-                width: 78px;
-                height: 78px;
+                width: 76px;
+                height: 76px;
             }
 
             .large-time {
@@ -358,9 +389,10 @@
             <h1 class="title">Metro Transit</h1>
             <p class="subtitle">Show operator your ticket</p>
 
-            <!-- Pulsing Circle Logo -->
+            <!-- Growing Light-Green Ring Around Center Logo -->
             <div class="logo-wrapper">
-                <div class="logo-container">
+                <div class="logo-stage">
+                    <span class="green-grow-ring" aria-hidden="true"></span>
                     <div class="logo-inner">
                         <img src="go_to_logo_PUez.png" alt="Go To Logo" class="logo-image">
                     </div>
@@ -398,20 +430,6 @@
             });
             const statusEl = document.getElementById('statusTime');
             if (statusEl) statusEl.textContent = statusTime;
-
-            const navDate = now.toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric'
-            });
-            const navTime = now.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            });
-            const navDateEl = document.getElementById('navDate');
-            const navTimeEl = document.getElementById('navTime');
-            if (navDateEl) navDateEl.textContent = navDate;
-            if (navTimeEl) navTimeEl.textContent = navTime;
 
             const largeTime = now.toLocaleTimeString('en-US', {
                 hour: 'numeric',
