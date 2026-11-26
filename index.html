@@ -146,34 +146,34 @@
             justify-content: center;
         }
 
-        /* 1. Vibrant green ring: always #84cc16, breathes wide <-> thin across 3 widths */
+        /* 1. Vibrant #84cc16 ring: out to width 1 -> back to almost nothing -> out to much wider width 2 -> back to almost nothing -> out to widest width 3 -> back to almost nothing */
         .vibrant-green-ring {
             position: absolute;
             width: 120px;
             height: 120px;
             border-radius: 50%;
             background: #84cc16;
-            transform: scale(1.16);
+            transform: scale(1.03);
             transform-origin: center center;
             pointer-events: none;
             z-index: 1;
             will-change: transform;
-            animation: vibrantBreathWidths 10s ease-in-out infinite;
+            animation: outAndBackThreeStages 7.2s ease-in-out infinite;
         }
 
-        /* 2. Smaller darker green ring: separate interval, stays darker green, never gets as wide */
+        /* 2. Separate darker green ring: smaller max width, its own rhythm */
         .dark-green-pulse {
             position: absolute;
             width: 120px;
             height: 120px;
             border-radius: 50%;
             background: #15803d;
-            transform: scale(1.04);
+            transform: scale(1.02);
             transform-origin: center center;
             pointer-events: none;
             z-index: 2;
             will-change: transform;
-            animation: darkShadowPulse 4.2s ease-in-out infinite;
+            animation: darkShadowPulse 3.4s ease-in-out infinite;
         }
 
         .logo-inner {
@@ -279,41 +279,44 @@
             background: #1d4ed8;
         }
 
-        /* Vibrant #84cc16 breathes across 3 widths (thin -> medium -> wide -> medium -> thin) without fading out */
-        @keyframes vibrantBreathWidths {
+        /* Stage 1 out & back to almost nothing -> Stage 2 (much wider) out & back to almost nothing -> Stage 3 (widest) out & back to almost nothing */
+        @keyframes outAndBackThreeStages {
             0% {
-                transform: scale(1.14);
+                transform: scale(1.03);
             }
-            16% {
-                transform: scale(1.32);
+            8.33% {
+                transform: scale(1.24);
             }
-            33% {
-                transform: scale(1.50);
+            16.66% {
+                transform: scale(1.03);
             }
-            50% {
-                transform: scale(1.72);
+            29.16% {
+                transform: scale(1.56);
             }
-            67% {
-                transform: scale(1.50);
+            41.66% {
+                transform: scale(1.03);
             }
-            84% {
-                transform: scale(1.32);
+            58.33% {
+                transform: scale(1.78);
+            }
+            75% {
+                transform: scale(1.03);
             }
             100% {
-                transform: scale(1.14);
+                transform: scale(1.03);
             }
         }
 
         /* Darker green pulse from middle on its own interval, smaller than the outer vibrant ring */
         @keyframes darkShadowPulse {
             0% {
-                transform: scale(1.03);
+                transform: scale(1.02);
             }
             50% {
-                transform: scale(1.36);
+                transform: scale(1.34);
             }
             100% {
-                transform: scale(1.03);
+                transform: scale(1.02);
             }
         }
 
