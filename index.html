@@ -102,12 +102,36 @@
             color: #6b7280;
         }
 
+        /* Dark Header Bar with X Above Ticket Header */
+        .dark-close-bar {
+            width: 100%;
+            background: #18181b;
+            color: #ffffff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 16px;
+        }
+
+        .close-x-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            user-select: none;
+        }
+
         /* Main Content */
         .main-content {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding: 18px 22px 20px;
+            padding: 16px 22px 20px;
             background: #ffffff;
             flex-grow: 1;
         }
@@ -129,7 +153,7 @@
             line-height: 1.35;
         }
 
-        /* Lime-Green Ring with Dark-Green Pulse Radiating Outward Every 10s */
+        /* Three-Stage Widening Lime-Green Ring with Dark-Green Shading */
         .logo-wrapper {
             width: 100%;
             display: flex;
@@ -144,27 +168,13 @@
             height: 196px;
             aspect-ratio: 1 / 1;
             border-radius: 50%;
-            background: #84cc16;
+            background: radial-gradient(circle, #84cc16 60%, #65a30d 90%, #3f6212 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(20, 83, 45, 0.14);
-        }
-
-        .logo-pulse-wave {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(21, 128, 61, 0.58) 0%, rgba(63, 98, 18, 0.42) 65%, rgba(101, 163, 13, 0) 100%);
-            transform: scale3d(0.95, 0.95, 1);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 1;
-            will-change: transform, opacity;
-            animation: centerOutPulse 10s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+            transform-origin: center center;
+            will-change: transform, box-shadow;
+            animation: threeStagePulse 6s ease-in-out infinite;
         }
 
         .logo-inner {
@@ -178,7 +188,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 6px rgba(20, 83, 45, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.08);
         }
 
         .logo-image {
@@ -263,56 +273,30 @@
             color: #374151;
         }
 
-        /* Bottom Blue Bar inside phone view */
+        /* Clean Blue Bottom Strip Without Labels/Icons */
         .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
             width: 100%;
+            min-height: 44px;
             background: #1d4ed8;
-            color: #ffffff;
-            padding: 12px 0;
         }
 
-        .nav-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #ffffff;
-            background: none;
-            border: none;
-            cursor: pointer;
-            opacity: 0.92;
-            transition: opacity 0.2s ease;
-            user-select: none;
-        }
-
-        .nav-button:active {
-            opacity: 1;
-        }
-
-        .nav-button-text {
-            font-size: 11px;
-            margin-top: 4px;
-        }
-
-        /* Radiates darker green from center outward every 10 seconds */
-        @keyframes centerOutPulse {
+        /* Stage 1 (base) -> Stage 2 (mid widen) -> Stage 3 (full widen) -> return */
+        @keyframes threeStagePulse {
             0% {
-                transform: scale3d(0.95, 0.95, 1);
-                opacity: 0;
+                transform: scale3d(0.86, 0.86, 1);
+                box-shadow: 0 4px 10px rgba(20, 83, 45, 0.28), inset 0 0 0 2px rgba(21, 128, 61, 0.28);
             }
-            8% {
-                transform: scale3d(1.02, 1.02, 1);
-                opacity: 0.85;
+            28% {
+                transform: scale3d(0.96, 0.96, 1);
+                box-shadow: 0 8px 18px rgba(20, 83, 45, 0.38), inset 0 0 0 3px rgba(21, 128, 61, 0.42);
             }
-            34% {
-                transform: scale3d(1.62, 1.62, 1);
-                opacity: 0;
+            58% {
+                transform: scale3d(1.08, 1.08, 1);
+                box-shadow: 0 14px 26px rgba(20, 83, 45, 0.5), inset 0 0 0 4px rgba(20, 83, 45, 0.5);
             }
             100% {
-                transform: scale3d(1.62, 1.62, 1);
-                opacity: 0;
+                transform: scale3d(0.86, 0.86, 1);
+                box-shadow: 0 4px 10px rgba(20, 83, 45, 0.28), inset 0 0 0 2px rgba(21, 128, 61, 0.28);
             }
         }
 
@@ -337,8 +321,7 @@
                 height: 180px;
             }
 
-            .logo-inner,
-            .logo-pulse-wave {
+            .logo-inner {
                 width: 112px;
                 height: 112px;
             }
@@ -401,6 +384,16 @@
             </svg>
         </div>
 
+        <!-- Dark Header Strip with X Above Ticket Title -->
+        <div class="dark-close-bar">
+            <button class="close-x-btn" type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M18 6L6 18"></path>
+                    <path d="M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
         <!-- Main Content -->
         <div class="main-content">
             <h1 class="title">Metro Transit</h1>
@@ -409,7 +402,6 @@
             <!-- Pulsing Circle Logo -->
             <div class="logo-wrapper">
                 <div class="logo-container">
-                    <span class="logo-pulse-wave" aria-hidden="true"></span>
                     <div class="logo-inner">
                         <img src="go_to_logo_PUez.png" alt="Go To Logo" class="logo-image">
                     </div>
@@ -430,45 +422,8 @@
             </div>
         </div>
 
-        <!-- Bottom Bar -->
-        <div class="bottom-nav">
-            <button class="nav-button" type="button">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                    <path d="M16 6l-4-4-4 4"></path>
-                    <path d="M12 2v15"></path>
-                </svg>
-                <span class="nav-button-text">Share</span>
-            </button>
-            <button class="nav-button" type="button">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-                <span class="nav-button-text">Favorites</span>
-            </button>
-            <button class="nav-button" type="button">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 16v-4"></path>
-                    <path d="M12 8h.01"></path>
-                </svg>
-                <span class="nav-button-text">Info</span>
-            </button>
-            <button class="nav-button" type="button">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-                <span class="nav-button-text">Settings</span>
-            </button>
-            <button class="nav-button" type="button">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="3,6 5,6 21,6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                </svg>
-                <span class="nav-button-text">Delete</span>
-            </button>
-        </div>
+        <!-- Clean Blue Bottom Strip -->
+        <div class="bottom-nav"></div>
     </div>
 
     <script>
